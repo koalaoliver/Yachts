@@ -1,0 +1,326 @@
+<%@ Page Title="" Language="C#" MasterPageFile="~/Back_User.Master" AutoEventWireup="true" CodeBehind="Back_EditYachs.aspx.cs" Inherits="work_Yachts.Back.Back_EditYachs" %>
+<%@ Register Assembly="CKEditor.NET" Namespace="CKEditor.NET" TagPrefix="CKEditor" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+
+
+
+          <!-- Add New Model  -->
+                    <div class="container-fluid">
+
+    <div class="row mt-3">
+      <div class="col-lg-6">
+         <div class="card">
+           <div class="card-body">
+              <%-- 第一個表格新增新聞add news--%>
+           <div class="card-title">編輯遊艇 Edit Yachts</div>
+           <hr>
+             <div class="form-group">
+                 <asp:DropDownList ID="DDYachtmodel" runat="server" OnSelectedIndexChanged="DDYachtmodel_SelectedIndexChanged" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="yachtModel" DataValueField="id"></asp:DropDownList>
+                 <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:OliverDB %>" SelectCommand="SELECT * FROM [Yachts]"></asp:SqlDataSource>
+             </div>
+           <div class="form-group">
+            <label for="input-1">New Design/Building </label><br />
+            <asp:CheckBox ID="CBoxNewDesign" runat="server" Text="NewDesign" Width="50%" />
+            <asp:CheckBox ID="CBoxNewBuilding" runat="server" Text="NewBuilding" Width="50%" />
+           </div>
+           <div class="form-group">
+            <label for="input-2">請輸入型號 Add Model</label>
+            <asp:TextBox ID="TBoxEDYachtModel" runat="server" type="text" class="form-control" placeholder="Model" Width="30%" ></asp:TextBox>
+            
+           </div>
+          
+           <div class="form-group">
+            <label for="input-3">上傳內容文章 Add Content</label>
+               <ckeditor:ckeditorcontrol ID="CKEdOcHtml" runat="server" BasePath="/Scripts/ckeditor/"
+    Toolbar="Bold|Italic|Underline|Strike|Subscript|Superscript|-|RemoveFormat
+        NumberedList|BulletedList|-|Outdent|Indent|-|JustifyLeft|JustifyCenter|JustifyRight|JustifyBlock|-|BidiLtr|BidiRtl
+        /
+        Styles|Format|Font|FontSize
+        TextColor|BGColor
+        Link|Image"
+    Height="400px"></ckeditor:ckeditorcontrol>
+               
+
+               <div class="form-group">
+                  <label for="input-4">overview DIMENSIONS Img</label>
+               <asp:FileUpload ID="DimImg" runat="server" />
+               </div>
+
+               <div class="form-group">
+                  <label for="input-5">Downloadfile Title</label>
+                   <asp:TextBox ID="downloadtitle" runat="server"></asp:TextBox>
+               </div>
+
+               <div class="form-group">
+                  <label for="input-6">Downloadfile</label>
+                   <asp:FileUpload ID="Filedown" runat="server" />
+               </div>
+
+               <div class="card-title">Layout & deck plan</div>
+                  <div class="form-group">
+                  <label for="input-7">Layout Img</label>
+                   <asp:FileUpload ID="LayoutImg" runat="server" AllowMultiple="True" />
+                  
+               </div>
+
+               <div class="card-title">DETAIL SPECIFICATION</div>
+                 <div class="form-group">
+                  <label for="input-8">DETAIL SPECIFICATION</label>
+                   
+     
+                     <ckeditor:ckeditorcontrol ID="CKEoverviewDimensionsJSON" runat="server" BasePath="/Scripts/ckeditor/"
+    Toolbar="Bold|Italic|Underline|Strike|Subscript|Superscript|-|RemoveFormat
+        NumberedList|BulletedList|-|Outdent|Indent|-|JustifyLeft|JustifyCenter|JustifyRight|JustifyBlock|-|BidiLtr|BidiRtl
+        /
+        Styles|Format|Font|FontSize
+        TextColor|BGColor
+        Link|Image"
+    Height="400px"></ckeditor:ckeditorcontrol>
+
+                
+
+
+               </div>
+
+               <asp:Button ID="BtnEditYacht" runat="server" Text="Add Yachts" class="btn btn-light px-5" OnClick="BtnEditYacht_Click" />  
+          </div>
+                </div>
+              </div>
+           </div>
+              <!-- Add New Model end -->    
+       <!-- Yachts Banner Start -->
+<%--<div class="page-body">
+    <div class="row">
+        <div class="col-md-12 col-xl-12">
+            <div class="card project-task">
+                <div class="card-header">
+                    <div class="card-header-left ">
+                        <h5>Yacht Model Banner Image</h5>
+                        <h6><span class="badge badge-pill badge-warning text-dark">* The maximum upload size at once is 10MB !</span></h6>
+                    </div>
+                    <div class="card-header-right">
+                        <ul class="list-unstyled card-option">
+                            <li><i class="icofont icofont-simple-left "></i></li>
+                            <li><i class="icofont icofont-maximize full-card"></i></li>
+                            <li><i class="icofont icofont-minus minimize-card"></i></li>
+                            <li><i class="icofont icofont-refresh reload-card"></i></li>
+                            <li><i class="icofont icofont-error close-card"></i></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="card-block p-b-10">
+                    <div class="table-responsive">
+                        <div class="input-group my-3">
+                            <asp:DropDownList ID="DropDownList1" runat="server" AutoPostBack="True" DataSourceID="SqlDataSource1" DataTextField="yachtModel" DataValueField="id" Width="50%" Font-Bold="True" class="btn btn-outline-primary dropdown-toggle" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged"></asp:DropDownList>
+
+                            <asp:SqlDataSource ID="SqlDataSource1" runat="server" ConnectionString="<%$ ConnectionStrings:OliverDB %>" SelectCommand="SELECT * FROM [Yachts]"></asp:SqlDataSource>
+
+                            <asp:FileUpload ID="imageUpload" runat="server" class="btn btn-outline-primary btn-block" AllowMultiple="True" />
+                            <asp:Button ID="UploadBtn" runat="server" Text="Upload" class="btn btn-primary" OnClick="UploadBtn_Click" />
+                        </div>
+                        <hr />
+                        <h6>Banner Image List :</h6>
+                        <h6><span class="badge badge-pill badge-success text-dark">* The first image will be the home page banner !</span></h6>
+                        <h6>Step1. To upload one image to be the home page banner.</h6>
+                        <h6>Step2. Then upload other images.</h6>
+                        <asp:RadioButtonList ID="RadioButtonList" runat="server" class="my-3 mx-auto" AutoPostBack="True" CellPadding="10" RepeatColumns="5" RepeatDirection="Horizontal" OnSelectedIndexChanged="RadioButtonListH_SelectedIndexChanged" ></asp:RadioButtonList>
+                        <asp:Button ID="DelImageBtn" runat="server" Text="Delete Image" type="button" class="btn btn-danger btn-sm" OnClientClick="return confirm('Are you sure you want to delete？')" Visible="False" OnClick="DelHImageBtn_Click" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>--%>
+<!-- Yachts Banner End -->
+
+        <!-- Model List Start -->
+        <div class="col-md-12 col-xl-8">
+            <div class="card project-task">
+                <div class="card-header">
+                    <div class="card-header-left ">
+                        <h5>Yacht Model List</h5>
+                    </div>
+               
+                </div>
+                <div class="card-block p-b-10">
+                    <div class="table-responsive text-center">
+      
+
+                           
+                   
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Model List End -->
+<!-- Yachts Type End -->
+</asp:Content>
+------------------------------------
+
+
+
+public partial class Back_EditYachs : System.Web.UI.Page
+{
+    
+    protected void Page_Load(object sender, EventArgs e)
+    {
+
+     //宣告 List 方便用 Add 依序添加圖檔資料
+    
+   
+        if (!IsPostBack)
+        {
+            //DropDownList1.DataBind(); //先綁定，圖片才能取到型號
+            
+        }
+    }
+
+    protected void BtnEditYacht_Click(object sender, EventArgs e)
+    {
+
+        DateTime nowTime = DateTime.Now;
+        string guidStr = $"{Guid.NewGuid():N}{nowTime:ff}";
+        string isNewDesign = CBoxNewDesign.Checked ? "True" : "False";
+        string isNewBuilding = CBoxNewBuilding.Checked ? "True" : "False";
+        
+
+        string dimensionsImgPath = SaveFile(DimImg, "DimensionsImages");
+        string downloadsFilePath = SaveFile(Filedown, "Downloads");
+        //-------------上傳大量圖片
+        List<FileUpload> fileUploads = new List<FileUpload>
+{
+    LayoutImg
+};
+
+        List<string> imagePaths = new List<string>();
+
+        foreach (var fileUpload in fileUploads)
+        {
+            if (fileUpload.HasFiles)
+            {
+                foreach (var file in fileUpload.PostedFiles)
+                {
+                    string filename = Path.GetFileName(file.FileName);
+                    string filePath1 = Server.MapPath("~/upload/yachts/" + filename);
+                    file.SaveAs(filePath1);
+
+                    imagePaths.Add(filePath1);
+                }
+            }
+        }
+
+        // 将图片路径以 HTML 格式插入数据库
+        string imagesHtml = GenerateImageHTML(imagePaths);
+
+        //-------------上傳大量圖片
+
+        SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OliverDB"].ConnectionString);
+        SqlCommand command = new SqlCommand("UPDATE INTO Yachts (yachtModel, isNewDesign, isNewBuilding, guid, overviewContentHtml, overviewDimensionsImgPath, overviewDownloadsFilePath, layoutDeckPlanImgPathJSON, overviewDimensionsJSON) VALUES (@yachtModelStr, @isNewDesign, @isNewBuilding, @guidStr ,@overviewContentHtml ,@overviewDimensionsImgPath ,@overviewDownloadsFilePath, @layoutDeckPlanImgPathJSON ,@overviewDimensionsJSON)", connection);
+
+        connection.Open();
+
+        command.Parameters.AddWithValue("@yachtModelStr", TBoxEDYachtModel.Text);
+        command.Parameters.AddWithValue("@isNewDesign", isNewDesign);
+        command.Parameters.AddWithValue("@isNewBuilding", isNewBuilding);
+        command.Parameters.AddWithValue("@guidStr", guidStr);
+        command.Parameters.AddWithValue("@overviewContentHtml", CKEdOcHtml.Text);
+        command.Parameters.AddWithValue("@overviewDimensionsImgPath", dimensionsImgPath);
+        command.Parameters.AddWithValue("@overviewDownloadsFilePath", downloadsFilePath);
+        command.Parameters.AddWithValue("@layoutDeckPlanImgPathJSON", imagesHtml);
+        command.Parameters.AddWithValue("@overviewDimensionsJSON", CKEoverviewDimensionsJSON.Text);
+
+        command.ExecuteNonQuery();
+
+        Response.Write("<script>alert('上傳成功')</script>");
+
+
+    }
+    private string GenerateImageHTML(List<string> imagePaths)
+    { //for新聞內容上傳圖片的
+        StringBuilder imagesHtml = new StringBuilder();
+        //string uploadFolderPath = "~/upload/news/"; // 定義上傳資料夾的相對路徑
+
+        foreach (string path in imagePaths)
+        {
+            string relativePath = path.Replace(Server.MapPath("~"), ""); // 取得相對路徑
+            imagesHtml.Append("<p><img alt=\"\" src=\"" + relativePath + "\" style=\"width: 700px;\" /></p>");
+        }
+
+        return imagesHtml.ToString();
+    }
+
+    private string SaveFile(FileUpload fileUploadControl, string folderName)
+    {
+        if (fileUploadControl.HasFile)
+        {
+            string fileName = Path.GetFileName(fileUploadControl.FileName);
+            string folderPath = Server.MapPath($"~/upload/yachts{folderName}/");
+            string filePath = Path.Combine(folderPath, fileName);
+
+            Directory.CreateDirectory(folderPath);
+            fileUploadControl.SaveAs(filePath);
+
+            return filePath;
+        }
+
+        return null;
+    }
+
+    protected void DDYachtmodel_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        showDealerList();
+    }
+    private void showDealerList()
+    {
+        string selyachtModel = DDYachtmodel.SelectedValue;
+
+        SqlConnection connection = new SqlConnection(WebConfigurationManager.ConnectionStrings["OliverDB"].ConnectionString);
+        {
+            string sql = "SELECT * FROM Yachts WHERE id = @id"; // 使用 yachtModel 作為條件，這可能需要調整以適應你的資料庫結構
+            SqlCommand command = new SqlCommand(sql, connection);
+            command.Parameters.AddWithValue("@id", selyachtModel); // 將選擇的 Headline 設置為查詢條件
+
+            connection.Open();
+            SqlDataReader reader = command.ExecuteReader();
+
+            if (reader.HasRows)
+            {
+                while (reader.Read())
+                {
+                    TBoxEDYachtModel.Text = HttpUtility.HtmlEncode(reader["yachtModel"].ToString()); // 使用 HtmlEncode 方法對資料進行編碼
+                    CBoxNewDesign.Checked = reader["isNewDesign"].ToString().Equals("True", StringComparison.OrdinalIgnoreCase);
+                    CBoxNewBuilding.Checked = reader["isNewBuilding"].ToString().Equals("True", StringComparison.OrdinalIgnoreCase);
+                    CKEdOcHtml.Text = HttpUtility.HtmlEncode(reader["overviewContentHtml"].ToString());
+                    //DimImg.PostedFile = reader["overviewDimensionsImgPath"].ToString(); // 將上傳檔案的路徑設置到 FileUpload 控制項
+                    downloadtitle.Text = HttpUtility.HtmlEncode(reader["overviewDownloadsFilePath"].ToString());
+
+                    // 將上傳多個檔案的路徑設置到 FileUpload 控制項
+                    string layoutImgPathsJson = reader["layoutDeckPlanImgPathJSON"].ToString();
+                    //LayoutImg.PostedFiles = DeserializeLayoutPaths(layoutImgPathsJson);
+
+                    CKEoverviewDimensionsJSON.Text = HttpUtility.HtmlEncode(reader["overviewDimensionsJSON"].ToString());
+                }
+            }
+
+            reader.Close();
+        }
+    }
+
+    private List<string> DeserializeLayoutPaths(string json)
+    {
+        List<string> layoutPaths = new List<string>();
+        if (!string.IsNullOrEmpty(json))
+        {
+            layoutPaths = JsonConvert.DeserializeObject<List<string>>(json);
+        }
+        return layoutPaths;
+    }
+
+ 
+}
+}
